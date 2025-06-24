@@ -1,0 +1,11 @@
+IP résolue : 160.155.229.139
+3 Ping réussis, CompletedProcess(args=['ping', '-n', '1', 'intranet.stats.ci'], returncode=0, stdout="\nEnvoi d'une requˆte 'ping' sur intranet.stats.ci [160.155.229.139] avec 32 octets de donn‚esÿ:\nR‚ponse de 160.155.229.139ÿ: Impossible de joindre l'h“te de destination.\n\nStatistiques Ping pour 160.155.229.139:\n    Paquetsÿ: envoy‚s = 1, re‡us = 1, perdus = 0 (perte 0%),\n", stderr='')
+Analyse du domaine : intranet.stats.ci
+Date : 2025-06-24 09:30:58
+3 Ping réussis, CompletedProcess(args=['ping', '-n', '1', 'intranet.stats.ci'], returncode=0, stdout="\nEnvoi d'une requˆte 'ping' sur intranet.stats.ci [160.155.229.139] avec 32 octets de donn‚esÿ:\nR‚ponse de 160.155.229.139ÿ: Impossible de joindre l'h“te de destination.\n\nStatistiques Ping pour 160.155.229.139:\n    Paquetsÿ: envoy‚s = 1, re‡us = 1, perdus = 0 (perte 0%),\n", stderr='')
+Analyse du domaine : intranet.stats.ci
+Date : 2025-06-24 09:30:58
+3 Ping réussis, CompletedProcess(args=['ping', '-n', '1', 'intranet.stats.ci'], returncode=0, stdout="\nEnvoi d'une requˆte 'ping' sur intranet.stats.ci [160.155.229.139] avec 32 octets de donn‚esÿ:\nR‚ponse de 160.155.229.139ÿ: Impossible de joindre l'h“te de destination.\n\nStatistiques Ping pour 160.155.229.139:\n    Paquetsÿ: envoy‚s = 1, re‡us = 1, perdus = 0 (perte 0%),\n", stderr='')
+Analyse du domaine : intranet.stats.ci
+Date : 2025-06-24 09:30:58
+Résolution inverse : OCI-160.155.229.139.aviso.ci
