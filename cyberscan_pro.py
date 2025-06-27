@@ -54,15 +54,15 @@ def reverse_dns(ip_address):
 ports = [22, 80, 443, 3306]
 open_ports = []
 timeout = 3  # secondes
-def scan_port(ip_address, ports):
+def scan_port(ip_address, port):
     try:
         with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
             s.settimeout(timeout)
-            result = s.connect_ex((ip_address, ports))
+            result = s.connect_ex((ip_address, port))
             if result == 0:
                 print(f"[+] Port {port} est ouvert")
                 rapport.append(f"Port {port} ouvert")#
-                open_ports.append(ports)
+                open_ports.append(port)
                 try:
                     # Tenter de lire la bannière
                     s.sendall(b'\r\n')  # pour déclencher parfois une réponse
@@ -80,7 +80,7 @@ def scan_port(ip_address, ports):
         print(f"Erreur sur le port {port} : {e}")
 
 #simule une requete http get
-def requete_http_get():
+def requete_http_get(nom_de_domaine):
     
     # Tentative de connexion au port 80 (HTTP)
     try:
@@ -107,7 +107,7 @@ def requete_http_get():
         print(f"❌ Une erreur s'est produite : {e}")
 
 #scan les sous domaines connus
-def scan_sous_domaines():
+def scan_sous_domaines(nom_de_domaine):
    
     sous_domaines = ['www', 'mail', 'ftp', 'admin', 'test', 'webmail']
 
@@ -128,7 +128,7 @@ def scan_sous_domaines():
 
 
 def save_report(nom_de_domaine, rapport):
-    chemin_dossier = r"C:\Users\hp\cyberscanpro"
+    chemin_dossier = r"C:\Users\Manou\cyberscanpro"
     nom_fichier = f"rapport_{nom_de_domaine}.txt"
     chemin_complet = os.path.join(chemin_dossier, nom_fichier)
     with open(chemin_complet, "w", encoding="utf-8") as f:
@@ -166,7 +166,7 @@ def analyser_domaine(nom_de_domaine):
                 print(f"Ping réussi vers {nom_de_domaine}")
                 print(result.stdout)
                 reussite +=1
-                rapport.append(f"3 Ping réussis, {result}")#
+                rapport.append(f"{reussite}/3 Ping réussis")
             else:
                 print(f"Échec du ping vers {nom_de_domaine}")
                 print(result.stderr)
@@ -180,7 +180,7 @@ def analyser_domaine(nom_de_domaine):
         rapport.append(f"Date : {now}")#
 
 
-def main():
+def main(ip_address):
     #ip = input("Entrez une adresse IP : ")
     ttl = get_ttl(ip_address)
     if ttl is not None:
@@ -194,7 +194,7 @@ def main():
 
 rapport =[]##  
 def save_historique(entry):
-    chemin_dossier = r"C:\Users\hp\cyberscanpro"
+    chemin_dossier = r"C:\Users\Manou\cyberscanpro"
     nom_fichier = f"historique.txt"
     chemin_complet = os.path.join(chemin_dossier, nom_fichier)
     with open(chemin_complet, "a", encoding="utf-8") as f:
@@ -228,9 +228,16 @@ while True:
     else:
         invalid_count=0
 
-    analyse=analyser_domaine(nom_de_domaine)
+    rapport.clear()
+    open_ports.clear()
 
-    ttl_os = main()
+    analyser_domaine(nom_de_domaine)
+    main(ip_address)
+
+
+    #analyse=analyser_domaine(nom_de_domaine)
+
+    ttl_os = main(ip_address)
 
     reverse = reverse_dns(ip_address)
     print(f"Nom d'hôte pour {ip_address} : {reverse}")
@@ -242,8 +249,8 @@ while True:
         scan=scan_port(ip_address, port)
     
 
-    http = requete_http_get()
-    subdomains = scan_sous_domaines()
+    http = requete_http_get(nom_de_domaine)
+    subdomains = scan_sous_domaines(nom_de_domaine)
     rapport_txt = "\n".join(rapport)
 
     save_report(nom_de_domaine, rapport_txt)
